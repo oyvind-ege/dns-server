@@ -15,13 +15,13 @@ fn main() {
                 let response = DNSMessage {
                     header: DNSMessageHeader {
                         id: 1234,
-                        is_response: false,
+                        qr: true,
                         opcode: OpCode::QUERY,
                         authoritative_answer: false,
                         is_truncated: false,
                         is_recursion_desired: false,
                         is_recursion_available: false,
-                        z: 0,
+                        z: Z::Default,
                         response_code: RCode::NoError,
                         question_count: 0,
                         answer_count: 0,
@@ -29,6 +29,9 @@ fn main() {
                         resource_records_count: 0,
                     },
                 };
+
+                response.print();
+                println!("Bytes: {:0x?}", &DNSMessage::to_bytes(&response).unwrap());
                 udp_socket
                     .send_to(&DNSMessage::to_bytes(&response).unwrap(), source)
                     .expect("Failed to send response");
