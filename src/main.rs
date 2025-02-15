@@ -1,3 +1,4 @@
+use crate::flag::Flag;
 use codecrafters_dns_server::*;
 #[allow(unused_imports)]
 use std::net::UdpSocket;
