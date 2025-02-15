@@ -1,40 +1,22 @@
-use arbitrary_int::u96;
-use deku::bitvec::{BitRef, BitView, Lsb0, Msb0};
-use deku::ctx::Endian;
-use deku::prelude::*;
-
-#[derive(Debug, PartialEq, DekuWrite, DekuRead)]
-#[deku(id_type = "u8", bits = 4, endian = "endian", ctx = "endian: Endian")]
+#[derive(Debug, PartialEq)]
 pub enum OpCode {
-    #[deku(id = "0")]
     QUERY = 0,
-    #[deku(id = "1")]
     IQUERY = 1,
-    #[deku(id = "2")]
     STATUS = 2,
 }
 
-#[derive(Debug, PartialEq, DekuWrite, DekuRead)]
-#[deku(id_type = "u8", bits = 4, endian = "endian", ctx = "endian: Endian")]
+#[derive(Debug, PartialEq)]
 pub enum RCode {
-    #[deku(id = "0")]
     NoError = 0,
-    #[deku(id = "1")]
     FormatError = 1,
-    #[deku(id = "2")]
     ServerFailure = 2,
-    #[deku(id = "3")]
     NameError = 3,
-    #[deku(id = "4")]
     NotImplemented = 4,
-    #[deku(id = "5")]
     Refused = 5,
 }
 
-#[derive(Debug, PartialEq, DekuWrite, DekuRead)]
-#[deku(id_type = "u8", bits = 3, endian = "endian", ctx = "endian: Endian")]
+#[derive(Debug, PartialEq)]
 pub enum Z {
-    #[deku(id = "0")]
     Default,
 }
 
