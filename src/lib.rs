@@ -44,57 +44,65 @@ pub struct Flag {
 }
 
 impl Flag {
-    pub fn set_qr(&mut self, state: bool) {
+    pub fn set_qr(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b1000000000000000,
             false => self.flag &= 0b0111111111111111,
         };
+
+        self
     }
 
-    pub fn set_opcode(&mut self, op: OpCode) {
+    pub fn set_opcode(&mut self, op: OpCode) -> &mut Self {
         match op {
             OpCode::QUERY => self.flag |= 0b0000000000000000,
             OpCode::IQUERY => self.flag |= 0b0000100000000000,
             OpCode::STATUS => self.flag |= 0b0001000000000000,
         }
+        self
     }
 
-    pub fn set_aa(&mut self, state: bool) {
+    pub fn set_aa(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b0000010000000000,
             false => self.flag &= 0b1111101111111111,
         };
+        self
     }
 
-    pub fn set_tc(&mut self, state: bool) {
+    pub fn set_tc(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b0000001000000000,
             false => self.flag &= 0b1111110111111111,
         };
+        self
     }
 
-    pub fn set_rd(&mut self, state: bool) {
+    pub fn set_rd(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b0000000100000000,
             false => self.flag &= 0b1111111011111111,
         };
+        self
     }
 
-    pub fn set_ra(&mut self, state: bool) {
+    pub fn set_ra(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b0000000010000000,
             false => self.flag &= 0b1111111101111111,
         };
+        self
     }
 
-    pub fn set_z(&mut self, state: bool) {
+    pub fn set_z(&mut self, state: bool) -> &mut Self {
         match state {
             true => self.flag |= 0b0000000001110000,
             false => self.flag &= 0b1111111110001111,
         };
+        self
     }
 
-    pub fn set_r_code(&mut self, rc: RCode) {
+    pub fn set_r_code(&mut self, rc: RCode) -> &mut Self {
         match rc {
             RCode::NoError => self.flag |= 0b0000000000000000,
             RCode::FormatError => self.flag |= 0b0000000000000001,
@@ -103,6 +111,11 @@ impl Flag {
             RCode::NotImplemented => self.flag |= 0b0000000000000100,
             RCode::Refused => self.flag |= 0b0000000000000101,
         }
+        self
+    }
+
+    pub fn collect(&mut self) -> Self {
+        Self { flag: self.flag }
     }
 }
 

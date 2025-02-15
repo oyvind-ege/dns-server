@@ -14,15 +14,13 @@ fn main() {
                 let response = DNSMessage {
                     header: DNSMessageHeader {
                         id: 1234,
-                        flags: Flag::default(),
+                        flags: Flag::default().set_qr(true).collect(),
                         question_count: 0,
                         answer_count: 0,
                         name_server_resource_count: 0,
                         resource_records_count: 0,
                     },
                 };
-
-                println!("{:#?}", &response.header.to_bytes(),);
 
                 udp_socket
                     .send_to(&response.header.to_bytes(), source)
