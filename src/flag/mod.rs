@@ -1,5 +1,5 @@
-use crate::OpCode;
-use crate::RCode;
+use crate::header::OpCode;
+use crate::header::RCode;
 
 #[derive(Debug, PartialEq, Default)]
 pub struct Flag {

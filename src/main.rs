@@ -1,5 +1,7 @@
 use crate::flag::Flag;
+use crate::header::DNSMessageHeader;
 use codecrafters_dns_server::*;
+use question::DNSQuestion;
 #[allow(unused_imports)]
 use std::net::UdpSocket;
 
@@ -21,6 +23,7 @@ fn main() {
                         name_server_resource_count: 0,
                         resource_records_count: 0,
                     },
+                    question: DNSQuestion::default(),
                 };
 
                 udp_socket
